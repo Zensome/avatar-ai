@@ -16,6 +16,8 @@ const s3 = new AWS.S3({
   secretAccessKey: env.SECRET_ACCESS_KEY,
 });
 
+const BUCKET_NAME = "avatar-ai-s3";
+
 async function generateIcon(prompt: string) {
   if (env.MOCK_DALLE === "true") {
     return base64Image;
@@ -75,7 +77,7 @@ export const generateRouter = createTRPCRouter({
       if (base64EncodedImage) {
         await s3
           .putObject({
-            Bucket: "avatar-ai-s3",
+            Bucket: BUCKET_NAME,
             Key: icon.id,
             Body: Buffer.from(base64EncodedImage, "base64"),
             ContentEncoding: "base64",
@@ -85,7 +87,7 @@ export const generateRouter = createTRPCRouter({
       }
 
       return {
-        imageUrl: base64EncodedImage,
+        imageUrl: `https://${BUCKET_NAME}.s3.amazonaws.com/${icon.id}`,
       };
     }),
 });

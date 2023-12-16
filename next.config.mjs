@@ -14,6 +14,9 @@ const config = {
       {
         hostname: "oaidalleapiprodscus.blob.core.windows.net",
       },
+      {
+        hostname: "avatar-ai-s3.s3.amazonaws.com",
+      },
     ],
   },
   /**
