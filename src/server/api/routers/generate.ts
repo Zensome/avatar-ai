@@ -4,22 +4,31 @@ import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import OpenAI from "openai";
 import { env } from "~/env.mjs";
+import { base64Image } from "~/data/base64Image";
+import AWS from "aws-sdk";
 
 const openai = new OpenAI({
   apiKey: env.DALLE_API_KEY,
 });
 
+const s3 = new AWS.S3({
+  accessKeyId: env.SECRET_ACCESS_KEY_ID,
+  secretAccessKey: env.SECRET_ACCESS_KEY,
+});
+
 async function generateIcon(prompt: string) {
   if (env.MOCK_DALLE === "true") {
-    return "https://oaidalleapiprodscus.blob.core.windows.net/private/org-WAw2HFJxhsABQ8NwQcqd6Dx7/user-zMjH3x6RqABWKLUhxYU8GfYv/img-BpAMlz5vKmv1jisqDqgLOekO.png?st=2023-12-15T06%3A35%3A57Z&se=2023-12-15T08%3A35%3A57Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2023-12-14T18%3A41%3A27Z&ske=2023-12-15T18%3A41%3A27Z&sks=b&skv=2021-08-06&sig=gsgF1sDgxSSp7%2Bp5myCGX5Dbp7eeFssJkDnLQz0P4aE%3D";
+    return base64Image;
   } else {
     const response = await openai.images.generate({
       model: "dall-e-3",
       prompt,
       n: 1,
       size: "1024x1024",
+      response_format: "b64_json",
     });
-    return response.data[0]?.url;
+
+    return response.data[0]?.b64_json;
   }
 }
 
@@ -54,10 +63,29 @@ export const generateRouter = createTRPCRouter({
         });
       }
 
-      const url = await generateIcon(input.prompt);
+      const base64EncodedImage = await generateIcon(input.prompt);
+
+      const icon = await ctx.prisma.icon.create({
+        data: {
+          prompt: input.prompt,
+          userId: ctx.session.user.id,
+        },
+      });
+
+      if (base64EncodedImage) {
+        await s3
+          .putObject({
+            Bucket: "avatar-ai-s3",
+            Key: icon.id,
+            Body: Buffer.from(base64EncodedImage, "base64"),
+            ContentEncoding: "base64",
+            ContentType: "image/png",
+          })
+          .promise();
+      }
 
       return {
-        imageUrl: url,
+        imageUrl: base64EncodedImage,
       };
     }),
 });
