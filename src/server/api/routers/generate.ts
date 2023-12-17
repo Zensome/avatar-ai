@@ -30,7 +30,7 @@ async function generateIcon(prompt: string, numberOfIcons = 1) {
       response_format: "b64_json",
     });
 
-    return response.data[0]?.b64_json;
+    return response.data.map((result) => result.b64_json || "");
   }
 }
 
@@ -75,7 +75,7 @@ export const generateRouter = createTRPCRouter({
         finalPrompt, // Cast finalPrompt to string to resolve the type error
         input.numberOfIcons
       );
-
+      console.log("base64EncodedImages", base64EncodedImages?.length);
       const createdIcons = await Promise.all(
         (Array.isArray(base64EncodedImages)
           ? base64EncodedImages
