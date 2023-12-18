@@ -10,7 +10,7 @@ export function PrimaryLinkButton(
   return (
     <Link
       className={clsx(
-        "rounded bg-blue-400 px-4 py-2 hover:bg-blue-500",
+        "rounded bg-indigo-400 px-4 py-2 hover:bg-indigo-500",
         className ?? ""
       )}
       {...propsWithoutClassname}

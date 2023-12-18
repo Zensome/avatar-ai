@@ -17,9 +17,12 @@ const Header = () => {
     enabled: isLoggedIn,
   });
   return (
-    <header className="dark:bg-gray-900">
+    <header className="dark:bg-slate-900">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        <PrimaryLink href="/" className="flex items-center gap-2">
+        <PrimaryLink
+          href="/"
+          className="flex items-center gap-2 text-lg font-bold"
+        >
           <Image src="/icon.png" alt="Logo" width="40" height="40" />
           Avatar Generator
         </PrimaryLink>

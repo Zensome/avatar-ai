@@ -146,7 +146,6 @@ const GeneratePage: NextPage = () => {
           <Button
             isLoading={generateIcon.isLoading}
             disabled={generateIcon.isLoading}
-            className="w-32 self-end"
           >
             Submit
           </Button>

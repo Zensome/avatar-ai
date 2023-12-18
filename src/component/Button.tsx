@@ -11,14 +11,14 @@ export function Button(
 
   const color =
     (variant ?? "primary") === "primary"
-      ? "bg-blue-400 hover:bg-blue-500"
+      ? "bg-indigo-400 hover:bg-indigo-500"
       : "bg-gray-400 hover:bg-gray-500";
 
   return (
     <button
       {...rest}
       className={clsx(
-        "flex w-32 items-center justify-center gap-2 rounded px-4 py-2 disabled:bg-gray-600",
+        "flex w-28 items-center justify-center gap-2 rounded px-3 py-2 disabled:bg-gray-600",
         color
       )}
     >

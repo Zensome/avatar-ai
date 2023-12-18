@@ -39,7 +39,7 @@ const HomePage: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="container mx-auto flex min-h-screen flex-col">
+      <main className="container mx-auto flex min-h-[calc(100vh-7rem)] flex-col">
         <HeroBanner />
       </main>
     </>
