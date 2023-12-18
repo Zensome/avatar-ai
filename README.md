@@ -1,9 +1,10 @@
 # Avatar Generator
+<img width="1464" alt="Screenshot 2023-12-18 at 11 20 29 PM" src="https://github.com/Zensome/avatar-ai/assets/101311947/92c6c79b-52e5-41a6-9931-46ce4123aa37">
 
 ## Introduction
 
-Avatar Generator is a Next.js application that allows users to create avatar/icon images. This app is originally created by programmer Cody
-Seibert. I built this app following with his tutorial to learn full stack development with Next.js, TypeScript, tRPC, and Tailwind CSS (using T3 starter), to familiarize myself with modern web development tools and how they work together. the demo of the is hosted on Vercel, however, since it's a free account, the image generation feature will time out since the Dalle api takes a while to generate the image, and the free account has a 5s timeout limit.
+Avatar Generator is a Next.js application that allows users to create avatar/icon images. This app is originally created by programmer [Cody](https://www.youtube.com/@WebDevCody)
+Seibert. I built this app following with his tutorial to learn full stack development with Next.js, TypeScript, tRPC, and Tailwind CSS (using T3 starter), to familiarize myself with modern web development tools and how they work together. [The demo](https://avatar.zensome.me/) of the is hosted on Vercel, however, since it's a free account, the image generation feature will time out since the Dalle api takes a while to generate the image, and the free account has a 5s timeout limit.
 
 ## Features
 
