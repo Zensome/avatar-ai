@@ -4,6 +4,7 @@ import { useBuyCredits } from "~/hooks/useBuyCredits";
 
 import { PrimaryLink } from "./PrimaryLink";
 import { Button } from "./Button";
+import Image from "next/image";
 
 const Header = () => {
   const session = useSession();
@@ -14,7 +15,10 @@ const Header = () => {
   return (
     <header className="dark:bg-gray-900">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        <PrimaryLink href="/">Icon Generator</PrimaryLink>
+        <PrimaryLink href="/" className="flex items-center gap-2">
+          <Image src="/icon.png" alt="Logo" width="40" height="40" />
+          Avatar Generator
+        </PrimaryLink>
         <ul className="flex gap-4">
           <li>
             <PrimaryLink href="/generate">Generate</PrimaryLink>
