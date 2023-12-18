@@ -1,5 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
-/* eslint-disable jsx-a11y/alt-text */
 import { type Icon } from "@prisma/client";
 import { type NextPage } from "next";
 import Head from "next/head";

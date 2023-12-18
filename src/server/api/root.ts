@@ -3,6 +3,7 @@ import { exampleRouter } from "~/server/api/routers/example";
 import { generateRouter } from "./routers/generate";
 import { checkoutRouter } from "~/server/api/routers/checkout";
 import { iconsRouter } from "./routers/icons";
+import { userRouter } from "./routers/user";
 
 /**
  * This is the primary router for your server.
@@ -11,9 +12,9 @@ import { iconsRouter } from "./routers/icons";
  */
 export const appRouter = createTRPCRouter({
   example: exampleRouter,
-  // a generate router for user to actually gen icons
   generate: generateRouter,
   checkout: checkoutRouter,
+  user: userRouter,
   icons: iconsRouter,
 });
 

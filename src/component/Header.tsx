@@ -5,6 +5,7 @@ import { useBuyCredits } from "~/hooks/useBuyCredits";
 import { PrimaryLink } from "./PrimaryLink";
 import { Button } from "./Button";
 import Image from "next/image";
+import { api } from "~/utils/api";
 
 const Header = () => {
   const session = useSession();
@@ -12,6 +13,9 @@ const Header = () => {
 
   const isLoggedIn = !!session.data;
 
+  const credits = api.user.getCredits.useQuery(undefined, {
+    enabled: isLoggedIn,
+  });
   return (
     <header className="dark:bg-gray-900">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
@@ -35,6 +39,7 @@ const Header = () => {
         <ul className="flex gap-4">
           {isLoggedIn && (
             <>
+              <div className="flex items-center">Credits: {credits.data}</div>
               <li>
                 <Button
                   onClick={() => {
