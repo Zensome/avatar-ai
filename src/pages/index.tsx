@@ -18,7 +18,7 @@ function HeroBanner() {
         </PrimaryLinkButton>
       </div>
       <Image
-        src="/banner.png"
+        src="/banner.jpg"
         alt="A showcase of various avatars and icons"
         width="500"
         height="500"
